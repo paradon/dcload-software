@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DcLoad from './components/dcload';
 import logo from './logo.svg';
 
 // components
@@ -21,9 +22,7 @@ class App extends Component {
         </div>
 
         <div className={ cssStyles.description }>
-          <p>
-            Content goes here.
-          </p>
+          <DcLoad />
         </div>
       </div>
     );
