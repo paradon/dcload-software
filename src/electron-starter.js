@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import path from 'path';
 import url from 'url';
 
@@ -54,3 +54,35 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+ipcMain.on('csvLog', (event, payload) => {
+  console.log(payload);
+  switch (payload.type) {
+    case 'selectLogfile':
+      // open save dialog
+      dialog.showSaveDialog(
+//        event.sender,
+        {
+          title: 'CSV Log File',
+          filters: [
+            { name: 'Comma Seperated Values', extensions: ['csv'] },
+          ],
+          defaultPath: 'dcload.csv',
+        },
+        (filename) => {
+          if (filename === undefined) {
+            console.log('save dialog canceled');
+            mainWindow.webContents.send('dispatch', { type: 'cancelSaveDialog' });
+          } else {
+            console.log(filename);
+            mainWindow.webContents.send('dispatch', { type: 'setLogfile', logfile: filename });
+          }
+        },
+      );
+      break;
+    case 'closeLogFile':
+      // Close existing open file
+      break;
+    default:
+      break;
+  }
+});

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DcLoad from './components/dcload';
+import CsvLog from './components/csvlog';
 import logo from './logo.svg';
 
 // components
@@ -23,6 +24,7 @@ class App extends Component {
 
         <div className={ cssStyles.description }>
           <DcLoad />
+          <CsvLog />
         </div>
       </div>
     );
