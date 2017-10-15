@@ -15,7 +15,7 @@ class Backend {
     this.mainWindow = null;
     this.csvLog = new CsvLog();
     console.log('CsvLog', this.csvLog);
-    this.registerHandler('csvLog', (payload, dispatch) => Handlers.csvLogHandler(payload, dispatch, this.csvLog));
+    this.registerHandler('csvLog', Handlers.csvLogHandler, this.csvLog);
   }
 
   createWindow() {
@@ -47,8 +47,9 @@ class Backend {
     }
   }
 
-  registerHandler(channel, handler) {
-    ipcMain.on(channel, (event, inpayload) => handler(inpayload, outpayload => this.dispatch(outpayload)));
+  registerHandler(channel, handler, ...data) {
+    const boundHandler = payload => handler(payload, x => this.dispatch(x), ...data);
+    ipcMain.on(channel, (event, payload) => boundHandler(payload));
   }
 }
 
