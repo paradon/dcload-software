@@ -56,7 +56,31 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-const csvLog = new CsvLog({
-  on: handler => ipcMain.on('csvLog', (event, payload) => handler(payload)),
-  send: payload => mainWindow.webContents.send('dispatch', payload),
+
+const csvLog = new CsvLog();
+
+ipcMain.on('csvLog', (event, payload) => {
+  switch (payload.type) {
+    case 'selectLogfile':
+      csvLog.selectLogfile()
+        .then((fn) => {
+          console.log('Set', fn);
+          mainWindow.webContents.send('dispatch', { type: 'setLogfile', logfile: fn });
+        })
+        .catch((err) => {
+          console.log('Canceled', err);
+          mainWindow.webContents.send('dispatch', { type: 'cancelSaveDialog' });
+        });
+      break;
+
+    case 'closeLogfile':
+      csvLog.closeLogfile()
+        .then(() => {
+          console.log('File Closed');
+        });
+      break;
+
+    default:
+      break;
+  }
 });

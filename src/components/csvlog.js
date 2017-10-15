@@ -14,8 +14,8 @@ class CsvLog extends Component {
     return (
       <section>
         <p>Logging={ this.props.logfile }</p>
-        <button onClick={ this.props.actions.selectLogFile } >Set CSV File</button>
-        <button onClick={ this.props.actions.closeLogFile } >Close File</button>
+        <button onClick={ this.props.actions.selectLogfile } >Set CSV File</button>
+        <button onClick={ this.props.actions.closeLogfile } >Close File</button>
       </section>
     );
   }
