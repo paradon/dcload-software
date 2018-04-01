@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DcLoad from './components/dcload';
 import CsvLog from './components/csvlog';
+import SerialPort from './components/serialport';
 import logo from './logo.svg';
 
 // components
@@ -23,6 +24,7 @@ class App extends Component {
         </div>
 
         <div className={ cssStyles.description }>
+          <SerialPort />
           <DcLoad />
           <CsvLog />
         </div>

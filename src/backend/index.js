@@ -16,6 +16,8 @@ class Backend {
     this.csvLog = new CsvLog();
     console.log('CsvLog', this.csvLog);
     this.registerHandler('csvLog', Handlers.csvLogHandler, this.csvLog);
+
+    this.registerHandler('serialDriver', Handlers.serialDriverHandler);
   }
 
   createWindow() {

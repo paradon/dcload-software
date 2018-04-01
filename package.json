@@ -4,14 +4,17 @@
   "license": "GPL-3.0+",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "serialport": "^6.1.1"
   },
   "devDependencies": {
     "custom-react-scripts": "0.2.0",
-    "electron": "^1.7.9",
+    "electron": "^1.8.4",
+    "electron-rebuild": "^1.7.3",
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-import": "^2.7.0",
